@@ -20,13 +20,8 @@ export default function(container_element, options){
 
     console.log("Build cascade")
     
-    // Set the position of the bricks
     positionBricks()
-
-    // Set container height determined by the largest col
     setContainerHeight()
-
-    // Listen for size changes in bricks
     listenSizeChanges()
 
 }
@@ -35,7 +30,6 @@ export function remove(){
   console.log("Removing cascade")
   unlistenSizeChanges()
 
-  // Dejar los estilos como estaban
   element.removeAttribute('style')
   for(let brick of bricks) brick.removeAttribute('style')
   
