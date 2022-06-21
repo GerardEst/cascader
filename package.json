@@ -1,6 +1,6 @@
 {
   "name": "cascader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Veeeery basic masonry",
   "main": "cascader.js",
   "scripts": {
