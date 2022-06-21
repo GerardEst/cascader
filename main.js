@@ -1,3 +1,3 @@
 import {cascader} from './cascader.js'
 
-cascader(document.querySelector('section'), 3)
+cascader(document.querySelector('#cascada'), 3)

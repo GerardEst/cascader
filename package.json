@@ -1,5 +1,5 @@
 {
-  "name": "cascader",
+  "name": "@gerardest/cascader",
   "version": "1.0.1",
   "description": "Veeeery basic masonry",
   "main": "cascader.js",
