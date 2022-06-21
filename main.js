@@ -1,3 +1,3 @@
-import {cascader} from './cascader.js'
+import cascader from './cascader-min.js'
 
 cascader(document.querySelector('#cascada'), 3)
