@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["cascader.js"],
+  "sourcesContent": ["\nexport function cascader(element, cols){\n    const bricks = element.querySelectorAll('div')\n    element.style.position = 'relative'\n    \n    for(let i in bricks){\n\n        const brick = bricks[i]\n        \n        const brick_row = Math.floor(i/cols)\n        const brick_width = 100/cols\n        const brick_col = i%cols\n        let brick_top = 0\n        \n        brick.setAttribute('row', brick_row)\n        brick.setAttribute('col', brick_col)\n        \n        brick.style.width = brick_width+'%'\n        brick.style.left = brick_width*brick_col+'%'\n        \n        const bricks_in_col = element.querySelectorAll(`[col='${brick_col}']`)\n        for(let brick_in_col of bricks_in_col){\n          if(brick_in_col.getAttribute('row') >= brick_row) continue\n\n          brick_top = brick_top + brick_in_col.offsetHeight\n          brick.style.top = brick_top+'px'\n        }\n        \n    }\n\n}"],
+  "mappings": "MACO,WAAkB,EAAS,EAAK,CACnC,GAAM,GAAS,EAAQ,iBAAiB,KAAK,EAC7C,EAAQ,MAAM,SAAW,WAEzB,OAAQ,KAAK,GAAO,CAEhB,GAAM,GAAQ,EAAO,GAEf,EAAY,KAAK,MAAM,EAAE,CAAI,EAC7B,EAAc,IAAI,EAClB,EAAY,EAAE,EAChB,EAAY,EAEhB,EAAM,aAAa,MAAO,CAAS,EACnC,EAAM,aAAa,MAAO,CAAS,EAEnC,EAAM,MAAM,MAAQ,EAAY,IAChC,EAAM,MAAM,KAAO,EAAY,EAAU,IAEzC,GAAM,GAAgB,EAAQ,iBAAiB,SAAS,KAAa,EACrE,OAAQ,KAAgB,GACtB,AAAG,EAAa,aAAa,KAAK,GAAK,GAEvC,GAAY,EAAY,EAAa,aACrC,EAAM,MAAM,IAAM,EAAU,KAGlC,CAEJ",
+  "names": []
+}

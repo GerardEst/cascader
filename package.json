@@ -1,0 +1,14 @@
+{
+  "name": "cascader",
+  "version": "1.0.0",
+  "description": "Veeeery basic masonry",
+  "main": "cascader.js",
+  "scripts": {
+    "test": "esbuild cascader.js --bundle --minify --sourcemap --outfile=cascader-min.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.14.47"
+  }
+}
