@@ -10,7 +10,7 @@ export default function(container_element, options){
     cols = options.columns
     horizontal_gap = options.horizontalGap || options.gap
     vertical_gap = options.verticalGap || options.gap
-    element = container_element
+    element = typeof container_element === 'string' ? document.querySelector(container_element) : container_element
 
     if(!element.id) console.error('Cascader: Container needs an id')
 
@@ -28,8 +28,8 @@ export default function(container_element, options){
 
 export function remove(){
   console.log("Removing cascade")
-  unlistenSizeChanges()
-
+  
+  resizeObserver.disconnect() 
   element.removeAttribute('style')
   for(let brick of bricks) brick.removeAttribute('style')
   
@@ -43,10 +43,6 @@ function listenSizeChanges(){
     setContainerHeight()
   })
   for(let brick of bricks) resizeObserver.observe(brick)
-}
-
-function unlistenSizeChanges(){
-  resizeObserver.disconnect() 
 }
 
 function positionBricks(){

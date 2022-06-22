@@ -6,3 +6,12 @@ cascader(document.querySelector('#cascada'), {
     verticalGap : 30
     horizontalGap : 30
 })
+
+o només amb el selector
+
+cascader('#cascada', {
+    columns: 3,
+    gap: 20, // To set vertical and horizontal gap equally
+    verticalGap : 30
+    horizontalGap : 30
+})

@@ -1,6 +1,6 @@
 import cascader, {remove} from './cascader.js'
 
-cascader(document.querySelector('#cascada'), {
+cascader('#cascada', {
     columns: 3,
     gap: 20,
     //verticalGap : 30
@@ -8,4 +8,11 @@ cascader(document.querySelector('#cascada'), {
 })
 
 document.querySelector('#remove').addEventListener('click', () => remove())
-document.querySelector('#cascade').addEventListener('click', () => cascader(document.querySelector('#cascada'), 3))
+document.querySelector('#cascade').addEventListener('click', () => {
+    cascader(document.querySelector('#cascada'), {
+        columns: 3,
+        gap: 20,
+        //verticalGap : 30
+        //horizontalGap : 30
+    })
+})
