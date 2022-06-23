@@ -3,10 +3,19 @@ let rows = 0
 let vertical_gap = 0
 let horizontal_gap = 0
 let element = null
-let resizeObserver = null
 let bricks = null
 
-export default function(container_element, options){
+// Creamos un resizeObserver donde vamos a meter cosas    
+// Usa la Resize Observer API para detectar cambios de tamaño en cualquier elemento -> https://developer.mozilla.org/en-US/docs/Web/API/Resize_Observer_API
+let resizeObserver = new ResizeObserver( (entries) => {
+  // Cuando algo dentro del observer se resizea, hace esto.
+  // Pero al principio dentro del observer no hay nada.
+  // Cada brick se pone luego cuando se posiciona
+  console.log("Resize detected", entries)
+  init()
+})
+
+export function cascade(container_element, options){
     cols = options.columns
     horizontal_gap = options.horizontalGap || options.gap
     vertical_gap = options.verticalGap || options.gap
@@ -18,31 +27,21 @@ export default function(container_element, options){
 
     element.style.position = 'relative'
 
-    console.log("Build cascade")
-    
-    positionBricks()
-    setContainerHeight()
-    listenSizeChanges()
-
+    init()
+}
+  
+function init(){
+  console.log("Building cascade")
+  positionBricks()
+  setContainerHeight()
 }
 
-export function remove(){
+export function removeCascade(){
   console.log("Removing cascade")
   
   resizeObserver.disconnect() 
   element.removeAttribute('style')
   for(let brick of bricks) brick.removeAttribute('style')
-  
-}
-
-// Usa la Resize Observer API para detectar cambios de tamaño en cualquier elemento -> https://developer.mozilla.org/en-US/docs/Web/API/Resize_Observer_API
-function listenSizeChanges(){
-  resizeObserver = new ResizeObserver( () => {
-    console.log("Resized")
-    positionBricks()
-    setContainerHeight()
-  })
-  for(let brick of bricks) resizeObserver.observe(brick)
 }
 
 function positionBricks(){
@@ -71,7 +70,9 @@ function positionBricks(){
 
       brick_top = brick_top + brick_in_col.offsetHeight
       brick.style.top = `${brick_top+vertical_gap*brick_row}px`
-    }  
+    }
+
+    resizeObserver.observe(brick)
   }
 }
 

@@ -1,15 +1,15 @@
-import cascader, {remove} from './cascader.js'
+import {cascade, removeCascade} from './cascader.js'
 
-cascader('#cascada', {
+cascade('#cascada', {
     columns: 3,
     gap: 20,
     //verticalGap : 30
     //horizontalGap : 30
 })
 
-document.querySelector('#remove').addEventListener('click', () => remove())
+document.querySelector('#remove').addEventListener('click', () => removeCascade())
 document.querySelector('#cascade').addEventListener('click', () => {
-    cascader(document.querySelector('#cascada'), {
+    cascade(document.querySelector('#cascada'), {
         columns: 3,
         gap: 20,
         //verticalGap : 30
