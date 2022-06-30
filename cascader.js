@@ -1,25 +1,26 @@
-let cols = 0
+let container_width = 0
 let rows = 0
+let cols = 0
 let vertical_gap = 0
 let horizontal_gap = 0
+let minWidth = 0
 let element = null
 let bricks = null
 
-// Creamos un resizeObserver donde vamos a meter cosas    
+// Creamos un resizeObserver donde vamos a meter los bricks   
 // Usa la Resize Observer API para detectar cambios de tamaño en cualquier elemento -> https://developer.mozilla.org/en-US/docs/Web/API/Resize_Observer_API
 let resizeObserver = new ResizeObserver( (entries) => {
-  // Cuando algo dentro del observer se resizea, hace esto.
-  // Pero al principio dentro del observer no hay nada.
-  // Cada brick se pone luego cuando se posiciona
-  console.log("Resize detected", entries)
   init()
 })
 
 export function cascade(container_element, options){
-    cols = options.columns
+
     horizontal_gap = options.horizontalGap || options.gap
     vertical_gap = options.verticalGap || options.gap
+    minWidth = options.minWidth || 200
     element = typeof container_element === 'string' ? document.querySelector(container_element) : container_element
+    container_width = element.offsetWidth
+    cols = Math.floor(container_width / minWidth)
 
     if(!element.id) console.error('Cascader: Container needs an id')
 
@@ -31,7 +32,7 @@ export function cascade(container_element, options){
 }
   
 function init(){
-  console.log("Building cascade")
+  console.log("Build cascade")
   positionBricks()
   setContainerHeight()
 }
@@ -39,43 +40,52 @@ function init(){
 export function removeCascade(){
   console.log("Removing cascade")
   
-  resizeObserver.disconnect() 
+  resizeObserver.disconnect()
   element.removeAttribute('style')
   for(let brick of bricks) brick.removeAttribute('style')
 }
 
 function positionBricks(){
   for(let i=0; i<bricks.length; i++){
+    
+    // Recalcular el container_width cuando se hace pequeño o grande y redistribuir columnas
+    container_width = element.offsetWidth
+    cols = Math.floor(container_width / minWidth)
+
     const brick = bricks[i]
 
     const brick_row = Math.floor(i/cols)
-    const brick_width = 100/cols
     const brick_col = i%cols
+    const brick_width = 100/cols
     const gap_reduce = horizontal_gap*(cols-1)/cols
-    let brick_top = 0
     if(brick_row > rows) rows = brick_row
-    
+
     brick.style.position = 'absolute'
     brick.setAttribute('row', brick_row)
     brick.setAttribute('col', brick_col)
-    
-    brick.style.width = `calc(${brick_width}% - ${gap_reduce}px)`
 
+    // Posiciona horizontalmente 
+    brick.style.width = `calc(${brick_width}% - ${gap_reduce}px)`
     brick.style.left = `calc(${brick_width*brick_col}% + ${horizontal_gap/cols * brick_col}px`
 
+    // Posiciona verticalmente, sumando los bricks en la columna (solo los que estan en filas superiores) 
     const bricks_in_col = element.querySelectorAll(`[col='${brick_col}']`)
-    
-    for(let brick_in_col of bricks_in_col){
-      if(brick_in_col.getAttribute('row') >= brick_row) continue
+    let brick_column_height = 0
 
-      brick_top = brick_top + brick_in_col.offsetHeight
-      brick.style.top = `${brick_top+vertical_gap*brick_row}px`
+    for(let brick_in_col of bricks_in_col){
+      if(brick_in_col.getAttribute('row') > brick_row) continue
+      brick_column_height = brick_column_height + brick_in_col.offsetHeight + vertical_gap
     }
 
+    brick_column_height = brick_column_height - brick.offsetHeight - vertical_gap
+    brick.style.top = brick_column_height + 'px'
+
     resizeObserver.observe(brick)
+    
   }
 }
 
+// Mira el tamaño de la columna mas larga y adapta el contenedor padre
 function setContainerHeight(){
   let largest_col = 0
   
