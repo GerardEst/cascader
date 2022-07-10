@@ -2,7 +2,6 @@ import {cascade, removeCascade} from './cascader.js'
 
 cascade('#cascada', {
     minWidth: 300, 
-    gap: 20
 })
 
 document.querySelector('#remove').addEventListener('click', () => removeCascade())

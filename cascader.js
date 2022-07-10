@@ -15,8 +15,8 @@ let resizeObserver = new ResizeObserver( (entries) => {
 
 export function cascade(container_element, options){
 
-    horizontal_gap = options.horizontalGap || options.gap
-    vertical_gap = options.verticalGap || options.gap
+    horizontal_gap = options.horizontalGap || options.gap || 20
+    vertical_gap = options.verticalGap || options.gap || 20
     minWidth = options.minWidth || 200
     element = typeof container_element === 'string' ? document.querySelector(container_element) : container_element
     container_width = element.offsetWidth
