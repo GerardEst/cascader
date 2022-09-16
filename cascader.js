@@ -22,6 +22,9 @@ export function cascade(container_element, options){
     container_width = element.offsetWidth
     cols = Math.floor(container_width / minWidth)
 
+    // TODO -> Com que només ID?? Que es pugui amb classes també home. 
+    // O passant-li qualsevol cosa, que no necessiti ID vaia 
+    // I si hi ha un error, que no bloquegi el js de la pagina
     if(!element.id) console.error('Cascader: Container needs an id')
 
     bricks = document.querySelectorAll(`#${element.id} > *`)
@@ -32,14 +35,11 @@ export function cascade(container_element, options){
 }
   
 function init(){
-  console.log("Build cascade")
   positionBricks()
   setContainerHeight()
 }
 
-export function removeCascade(){
-  console.log("Removing cascade")
-  
+export function removeCascade(){  
   resizeObserver.disconnect()
   element.removeAttribute('style')
   for(let brick of bricks) brick.removeAttribute('style')
@@ -86,6 +86,7 @@ function positionBricks(){
 }
 
 // Mira el tamaño de la columna mas larga y adapta el contenedor padre
+// Seguro que esto se puede hacer aprobechando los otros loops
 function setContainerHeight(){
   let largest_col = 0
   
