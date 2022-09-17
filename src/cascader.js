@@ -7,8 +7,6 @@ let minWidth = 0
 let element = null
 let bricks = null
 
-// Creamos un resizeObserver donde vamos a meter los bricks   
-// Usa la Resize Observer API para detectar cambios de tamaño en cualquier elemento -> https://developer.mozilla.org/en-US/docs/Web/API/Resize_Observer_API
 let resizeObserver = new ResizeObserver( (entries) => {
   init()
 })
@@ -23,8 +21,7 @@ export function cascade(container_element, options){
     cols = Math.floor(container_width / minWidth)
 
     // TODO -> Com que només ID?? Que es pugui amb classes també home. 
-    // O passant-li qualsevol cosa, que no necessiti ID vaia 
-    // I si hi ha un error, que no bloquegi el js de la pagina
+    // TODO -> si hi ha un error, que no bloquegi el js de la pagina
     if(!element.id) console.error('Cascader: Container needs an id')
 
     bricks = document.querySelectorAll(`#${element.id} > *`)
@@ -48,7 +45,7 @@ export function removeCascade(){
 function positionBricks(){
   for(let i=0; i<bricks.length; i++){
     
-    // Recalcular el container_width cuando se hace pequeño o grande y redistribuir columnas
+    // Recalculate container_width when resize and redistribute columns
     container_width = element.offsetWidth
     cols = Math.floor(container_width / minWidth)
 
@@ -64,11 +61,11 @@ function positionBricks(){
     brick.setAttribute('row', brick_row)
     brick.setAttribute('col', brick_col)
 
-    // Posiciona horizontalmente 
+    // Horizontal positioning
     brick.style.width = `calc(${brick_width}% - ${gap_reduce}px)`
     brick.style.left = `calc(${brick_width*brick_col}% + ${horizontal_gap/cols * brick_col}px`
 
-    // Posiciona verticalmente, sumando los bricks en la columna (solo los que estan en filas superiores) 
+    // Vertical positioning: sume of the precedent bricks in the column 
     const bricks_in_col = element.querySelectorAll(`[col='${brick_col}']`)
     let brick_column_height = 0
 
@@ -85,8 +82,8 @@ function positionBricks(){
   }
 }
 
-// Mira el tamaño de la columna mas larga y adapta el contenedor padre
-// Seguro que esto se puede hacer aprobechando los otros loops
+// Check the size of largest column and resize the cascade container
+// TODO -> Seguro que esto se puede hacer aprovechando los otros loops
 function setContainerHeight(){
   let largest_col = 0
   

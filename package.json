@@ -1,14 +1,14 @@
 {
   "name": "@gerardest/cascader",
-  "version": "1.1.1",
-  "description": "Veeeery basic masonry",
+  "version": "1.1.3",
+  "description": "Very basic and tiny masonry. Easy, responsive and resizeable blocks.",
   "main": "cascader.js",
   "scripts": {
-    "build": "esbuild cascader.js --drop:console --bundle --minify --sourcemap --format=esm --outfile=cascader-min.js"
+    "build": "esbuild src/cascader.js --drop:console --bundle --minify --sourcemap --format=esm --outfile=build/cascader-min.js"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "esbuild": "^0.14.47"
+  "devDependencies": {
+    "esbuild": "^0.15.7"
   }
 }
