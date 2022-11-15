@@ -4,19 +4,19 @@
 
 ### Usage
 
-`import cascader from './cascader.js'`
+`import {cascade} from './cascader.js'`
 
 Simplest usage is to call cascader passing the container of the masonry elements  
-`cascader('#container')`  
+`cascade('#container')`  
 or
 ~~~
 let container = document.querySelector('#cascada')
-cascader(container)
+cascade(container)
 ~~~
 
 ### Options
 ~~~
-cascader('#container', {
+cascade('#container', {
     minWidth: 200,
     gap: 20, // To set vertical and horizontal gap equally
     verticalGap : 30
