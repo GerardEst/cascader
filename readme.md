@@ -1,5 +1,7 @@
 Very basic and tiny masonry layout (1kb). Responsive and resizeable blocks.
 
+[Codepen Example](https://codepen.io/gereger/pen/gOyNPeV?editors=1111)
+
 ### Installation
 
 `npm install @gerardest/cascader`
@@ -25,3 +27,4 @@ cascade('#container', {
     horizontalGap : 30
 })
 ~~~
+
