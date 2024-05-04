@@ -1,3 +1,5 @@
+Very basic and tiny masonry layout (1kb). Responsive and resizeable blocks.
+
 ### Installation
 
 `npm install @gerardest/cascader`
