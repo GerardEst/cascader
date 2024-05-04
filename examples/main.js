@@ -1,5 +1,8 @@
-import { cascade } from "../build/cascader-min.js";
-let options = {
-  minWidth: 350
-};
-cascade("#container", options);
+import { cascade, removeCascade } from '../build/cascader-min.js'
+
+cascade("#container");
+
+document.querySelector('#remove').addEventListener('click', () => removeCascade())
+document.querySelector('#activate').addEventListener('click', () => {
+    cascade(document.querySelector('#container'))
+})
