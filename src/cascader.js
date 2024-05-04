@@ -13,18 +13,14 @@ let resizeObserver = new ResizeObserver( (entries) => {
 
 export function cascade(container_element, options){
 
-    horizontal_gap = options.horizontalGap || options.gap || 20
-    vertical_gap = options.verticalGap || options.gap || 20
-    minWidth = options.minWidth || 200
+    horizontal_gap = options?.horizontalGap || options?.gap || 20
+    vertical_gap = options?.verticalGap || options?.gap || 20
+    minWidth = options?.minWidth || 200
     element = typeof container_element === 'string' ? document.querySelector(container_element) : container_element
     container_width = element.offsetWidth
     cols = Math.floor(container_width / minWidth)
 
-    // TODO -> Com que només ID?? Que es pugui amb classes també home. 
-    // TODO -> si hi ha un error, que no bloquegi el js de la pagina
-    if(!element.id) console.error('Cascader: Container needs an id')
-
-    bricks = document.querySelectorAll(`#${element.id} > *`)
+    bricks = element.children
 
     element.style.position = 'relative'
 
