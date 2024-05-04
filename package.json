@@ -4,7 +4,9 @@
   "description": "Very basic and tiny masonry. Easy, responsive and resizeable blocks.",
   "main": "build/cascader-min.js",
   "scripts": {
-    "build": "esbuild src/cascader.js --drop:console --bundle --minify --sourcemap --format=esm --outfile=build/cascader-min.js"
+    "build": "esbuild src/cascader.ts --drop:console --bundle --minify --sourcemap --format=esm --outfile=build/cascader-min.js",
+    "watch": "esbuild src/cascader.ts --bundle --minify --watch --sourcemap --format=esm --outfile=build/cascader-min.js",
+    "buildExample": "esbuild examples/main.ts --format=esm --outfile=examples/main.js"
   },
   "keywords": [
     "masonry",
